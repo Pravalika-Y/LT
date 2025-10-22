@@ -1,0 +1,96 @@
+import { Faculty } from "./Faculty.types";
+
+export const mockFaculty: Faculty[] = [
+  {
+    id: "FAC101",
+    firstName: "Johnny",
+    lastName: "Dell",
+    subject: "Mathematics",
+    email: "johnnydell@gmail.com",
+    mobile: "345-098-8974",
+    gender: "Male",
+    dateOfBirth: "Sep 15, 1995",
+    availability: [
+      { days: "Mon, Tue, Wed", startTime: "17:00", endTime: "22:00" },
+      { days: "Sat, Sun", startTime: "11:00", endTime: "18:00" },
+    ],
+  },
+  {
+    id: "FAC102",
+    firstName: "Jane",
+    lastName: "Smith",
+    subject: "Physics",
+    email: "janesmith@email.com",
+    mobile: "123-456-7890",
+    gender: "Female",
+    dateOfBirth: "Mar 22, 1988",
+    availability: [
+      { days: "Mon, Wed, Fri", startTime: "09:00", endTime: "15:00" },
+    ],
+  },
+  {
+    id: "FAC103",
+    firstName: "Emily",
+    lastName: "Johnson",
+    subject: "Biology",
+    email: "emilyj@email.com",
+    mobile: "555-123-4567",
+    gender: "Female",
+    dateOfBirth: "Jul 10, 1992",
+    availability: [
+      { days: "Tue, Thu", startTime: "10:00", endTime: "16:00" },
+    ],
+  },
+  {
+    id: "FAC104",
+    firstName: "Michael",
+    lastName: "Brown",
+    subject: "Chemistry",
+    email: "mikeb@gmail.com",
+    mobile: "333-444-5555",
+    gender: "Male",
+    dateOfBirth: "Nov 5, 1985",
+    availability: [
+      { days: "Mon, Tue, Wed, Thu, Fri", startTime: "08:00", endTime: "14:00" },
+    ],
+  },
+  {
+    id: "FAC105",
+    firstName: "Sarah",
+    lastName: "Davis",
+    subject: "History",
+    email: "sarahd@example.com",
+    mobile: "888-777-6666",
+    gender: "Female",
+    dateOfBirth: "Jan 18, 1990",
+    availability: [
+      { days: "Mon, Wed", startTime: "13:00", endTime: "18:00" },
+    ],
+  },
+  {
+    id: "FAC106",
+    firstName: "David",
+    lastName: "Wilson",
+    subject: "Literature",
+    email: "davidw@domain.com",
+    mobile: "222-333-4444",
+    gender: "Male",
+    dateOfBirth: "Apr 30, 1987",
+    availability: [
+      { days: "Tue, Thu, Sat", startTime: "14:00", endTime: "20:00" },
+    ],
+  },
+  {
+    id: "FAC107",
+    firstName: "Linda",
+    lastName: "Martinez",
+    subject: "Art",
+    email: "lindam@email.com",
+    mobile: "999-888-7777",
+    gender: "Female",
+    dateOfBirth: "Dec 12, 1991",
+    availability: [
+      { days: "Wed, Fri, Sun", startTime: "10:00", endTime: "17:00" },
+    ],
+  },
+];
