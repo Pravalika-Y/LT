@@ -16,10 +16,10 @@ import { Faculty } from "./Faculty.types";
 interface CreateFacultyDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSave: (faculty: Omit<Faculty, "id">) => void;
+  onCreate: (faculty: Omit<Faculty, "id">) => void;
 }
 
-export const CreateFacultyDialog = ({ open, onOpenChange, onSave }: CreateFacultyDialogProps) => {
+export const CreateFacultyDialog = ({ open, onOpenChange, onCreate }: CreateFacultyDialogProps) => {
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -32,7 +32,7 @@ export const CreateFacultyDialog = ({ open, onOpenChange, onSave }: CreateFacult
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onCreate({ ...formData, availability: [] });
     onOpenChange(false);
     setFormData({
       firstName: "",

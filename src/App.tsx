@@ -19,6 +19,7 @@ const App = () => (
         <Sonner />
         <Routes>
           <Route path="/" element={<Layout><FacultyList /></Layout>} />
+          <Route path="/faculty" element={<Layout><FacultyList /></Layout>} />
           <Route path="/faculty/:id" element={<Layout><FacultyDetail /></Layout>} />
           <Route path="/dashboard" element={<Layout><div className="text-center py-12 text-muted-foreground">Dashboard - Coming Soon</div></Layout>} />
           <Route path="/students" element={<Layout><div className="text-center py-12 text-muted-foreground">Students - Coming Soon</div></Layout>} />

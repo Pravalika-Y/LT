@@ -255,6 +255,27 @@ const FacultyList = () => {
             ))}
           </TableBody>
         </Table>
+
+        {/* Pagination Footer */}
+        <div className="flex items-center justify-between px-4 py-3 border-t bg-muted/30">
+          <div className="text-sm text-muted-foreground">
+            1 - {filteredFaculty.length} of {filteredFaculty.length}
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-muted-foreground">Items per page:</span>
+            <Select defaultValue="07">
+              <SelectTrigger className="w-16 h-8">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="07">07</SelectItem>
+                <SelectItem value="10">10</SelectItem>
+                <SelectItem value="20">20</SelectItem>
+                <SelectItem value="50">50</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+        </div>
       </div>
 
       {/* Floating Create Button */}
