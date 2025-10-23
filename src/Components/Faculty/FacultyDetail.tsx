@@ -11,6 +11,7 @@ import { EditFacultyDialog } from "./EditFacultyDialog";
 import { facultyService } from "@/services/facultyService";
 import styles from "./Faculty.module.css";
 
+
 const FacultyDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();

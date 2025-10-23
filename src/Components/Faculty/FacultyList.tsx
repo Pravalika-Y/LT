@@ -1,9 +1,8 @@
-// src/Components/Faculty/FacultyList.tsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Eye, Pencil, Plus, MoreVertical, Filter, Search, ChevronDown } from "lucide-react";
 import { CreateFacultyDialog } from "./CreateFacultyDialog";
-import { EditFacultyDialog } from "./EditFacultyDialog"; // ✅ Only import — don't redefine!
+import { EditFacultyDialog } from "./EditFacultyDialog";
 import { Button } from "@/Components/global/button";
 import { Input } from "@/Components/global/input";
 import { Checkbox } from "@/Components/global/checkbox";
@@ -33,11 +32,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/Components/global/dropdown-menu";
-import { Label } from "@/Components/global/label";
 import { useToast } from "@/hooks/use-toast";
 import { Faculty } from "./Faculty.types";
 import { facultyService } from "@/services/facultyService";
-import styles from "./Faculty.module.css";
 
 const FacultyList = () => {
   const navigate = useNavigate();
@@ -144,18 +141,18 @@ const FacultyList = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
-        Loading faculty data...
+      <div className="flex items-center justify-center h-[calc(100vh-200px)]">
+        <p className="text-gray-500">Loading faculty data...</p>
       </div>
     );
   }
 
   return (
-    <div className={styles.facultyContainer}>
+    <div className="w-full max-w-7xl mx-auto">
       {/* Filters */}
       <div className="mb-6">
         <div className="flex flex-wrap items-center gap-4">
-          <div className="flex items-center gap-2 font-medium">
+          <div className="flex items-center gap-2 font-medium text-gray-700">
             <Filter className="h-4 w-4" />
             Filters
           </div>
@@ -167,7 +164,7 @@ const FacultyList = () => {
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pr-10"
             />
-            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
           </div>
 
           <Popover>
@@ -202,7 +199,7 @@ const FacultyList = () => {
             variant="ghost"
             onClick={clearFilters}
             disabled={!searchQuery && selectedSubjects.length === 0}
-            className="text-muted-foreground hover:text-foreground"
+            className="text-gray-600 hover:text-gray-900"
           >
             Clear
           </Button>
@@ -210,59 +207,69 @@ const FacultyList = () => {
       </div>
 
       {/* Faculty Table */}
-      <div className="border rounded-lg overflow-hidden">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Faculty ID</TableHead>
-              <TableHead>Faculty Name</TableHead>
-              <TableHead>Subject</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Faculty Mobile</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {filteredFaculty.map((faculty) => (
-              <TableRow key={faculty.id}>
-                <TableCell className="font-medium">{faculty.id}</TableCell>
-                <TableCell>
-                  {faculty.firstName} {faculty.lastName}
-                </TableCell>
-                <TableCell>{faculty.subject}</TableCell>
-                <TableCell>{faculty.email || "N/A"}</TableCell>
-                <TableCell>{faculty.mobile}</TableCell>
-                <TableCell className="text-right">
-                  <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                      <Button variant="ghost" size="icon">
-                        <MoreVertical className="h-4 w-4" />
-                      </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                      <DropdownMenuItem onClick={() => handleView(faculty.id)}>
-                        <Eye className="mr-2 h-4 w-4" />
-                        View
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => handleEdit(faculty)}>
-                        <Pencil className="mr-2 h-4 w-4" />
-                        Edit
-                      </DropdownMenuItem>
-                    </DropdownMenuContent>
-                  </DropdownMenu>
-                </TableCell>
+      <div className="bg-white border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+        <div className="overflow-x-auto">
+          <Table>
+            <TableHeader>
+              <TableRow className="bg-gray-50">
+                <TableHead className="font-semibold text-gray-700">Faculty ID</TableHead>
+                <TableHead className="font-semibold text-gray-700">Faculty Name</TableHead>
+                <TableHead className="font-semibold text-gray-700">Subject</TableHead>
+                <TableHead className="font-semibold text-gray-700">Email</TableHead>
+                <TableHead className="font-semibold text-gray-700">Faculty Mobile</TableHead>
+                <TableHead className="text-right font-semibold text-gray-700">Actions</TableHead>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHeader>
+            <TableBody>
+              {filteredFaculty.length === 0 ? (
+                <TableRow>
+                  <TableCell colSpan={6} className="text-center py-8 text-gray-500">
+                    No faculty members found
+                  </TableCell>
+                </TableRow>
+              ) : (
+                filteredFaculty.map((faculty) => (
+                  <TableRow key={faculty.id} className="hover:bg-gray-50">
+                    <TableCell className="font-medium">{faculty.id}</TableCell>
+                    <TableCell>
+                      {faculty.firstName} {faculty.lastName}
+                    </TableCell>
+                    <TableCell>{faculty.subject}</TableCell>
+                    <TableCell className="text-gray-600">{faculty.email || "N/A"}</TableCell>
+                    <TableCell>{faculty.mobile}</TableCell>
+                    <TableCell className="text-right">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <MoreVertical className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem onClick={() => handleView(faculty.id)}>
+                            <Eye className="mr-2 h-4 w-4" />
+                            View
+                          </DropdownMenuItem>
+                          <DropdownMenuItem onClick={() => handleEdit(faculty)}>
+                            <Pencil className="mr-2 h-4 w-4" />
+                            Edit
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
+                    </TableCell>
+                  </TableRow>
+                ))
+              )}
+            </TableBody>
+          </Table>
+        </div>
 
         {/* Pagination Footer */}
-        <div className="flex items-center justify-between px-4 py-3 border-t bg-muted/30">
-          <div className="text-sm text-muted-foreground">
-            1 - {filteredFaculty.length} of {filteredFaculty.length}
+        <div className="flex items-center justify-between px-4 py-3 border-t border-gray-200 bg-gray-50">
+          <div className="text-sm text-gray-600">
+            {filteredFaculty.length > 0 ? `1 - ${filteredFaculty.length} of ${filteredFaculty.length}` : "0 of 0"}
           </div>
           <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground">Items per page:</span>
+            <span className="text-sm text-gray-600">Items per page:</span>
             <Select defaultValue="07">
               <SelectTrigger className="w-16 h-8">
                 <SelectValue />
@@ -280,7 +287,7 @@ const FacultyList = () => {
 
       {/* Floating Create Button */}
       <Button
-        className="fixed bottom-8 right-8 h-14 w-14 rounded-full shadow-lg"
+        className="fixed bottom-8 right-8 h-14 w-14 rounded-full shadow-lg hover:shadow-xl transition-shadow"
         size="icon"
         onClick={() => setCreateDialogOpen(true)}
       >
